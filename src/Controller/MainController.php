@@ -9,7 +9,9 @@
 namespace App\Controller;
 
 
+use App\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Routing\Annotation\Route;
 
 class MainController extends Controller
@@ -19,6 +21,9 @@ class MainController extends Controller
      */
     public function mainPage()
     {
-        return $this->render('main.html.twig');
+
+        $form = $this->createForm(ContactType::class);
+        $form->add('submit', SubmitType::class, ['label' => 'Envoyez !']);
+        return $this->render('main.html.twig', ['form' => $form->createView()]);
     }
 }

@@ -9,6 +9,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Contact
 {
+    public function __construct()
+    {
+        $this->sentAt = new \DateTime();
+    }
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -30,6 +35,11 @@ class Contact
      * @ORM\Column(type="text", nullable=true)
      */
     private $content;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $name;
 
     public function getId()
     {
@@ -68,6 +78,18 @@ class Contact
     public function setContent(?string $content): self
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(?string $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }
